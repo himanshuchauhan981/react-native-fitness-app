@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import EmailLogin from './emailLogin';
+import PhoneLogin from './phoneLogin';
 
 class Login extends Component {
   constructor(props) {
@@ -12,6 +13,8 @@ class Login extends Component {
   render() {
     if (this.state.loginMethod == 'email') {
       return <EmailLogin />;
+    } else {
+      return <PhoneLogin />;
     }
   }
 }
