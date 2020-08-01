@@ -3,7 +3,7 @@ import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
-import Signup from './components/signup';
+import Signup from './components/signup-component/signup';
 import InitialScreen from './components/initialScreen';
 import Login from './components/login-component/login';
 

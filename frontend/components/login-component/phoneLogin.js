@@ -1,13 +1,8 @@
 import React, {Component} from 'react';
-import {
-  Text,
-  StyleSheet,
-  ImageBackground,
-  KeyboardAvoidingView,
-  View,
-} from 'react-native';
+import {Text, ImageBackground, KeyboardAvoidingView, View} from 'react-native';
 import {TextInput, TouchableOpacity} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import {phoneLoginStyles} from './loginStyles';
 
 class PhoneLogin extends Component {
   constructor(props) {
@@ -32,15 +27,15 @@ class PhoneLogin extends Component {
         name="exclamation-triangle"
         size={20}
         color={'red'}
-        style={styles.errorIcon}></Icon>
+        style={phoneLoginStyles.errorIcon}></Icon>
     );
     return (
       <ImageBackground
         resizeMode="cover"
         source={require('../../assets/images/mobileLogin.jpg')}
-        style={styles.phoneImage}>
+        style={phoneLoginStyles.phoneImage}>
         <KeyboardAvoidingView>
-          <Text style={styles.imageText}>
+          <Text style={phoneLoginStyles.imageText}>
             Easy discover new places and travel around world with your family or
             friends
           </Text>
@@ -49,8 +44,10 @@ class PhoneLogin extends Component {
               placeholder={'Enter your mobile number'}
               placeholderTextColor="white"
               style={[
-                styles.mobileInput,
-                this.state.mobileNumberError ? styles.emptyField : null,
+                phoneLoginStyles.mobileInput,
+                this.state.mobileNumberError
+                  ? phoneLoginStyles.emptyField
+                  : null,
               ]}
               onChangeText={(mobileNumber) => {
                 if (mobileNumber != '-' && mobileNumber != '.')
@@ -62,9 +59,11 @@ class PhoneLogin extends Component {
             />
             {this.state.mobileNumberError ? errorIcon : null}
           </View>
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity style={styles.floatingButton}>
-              <Icon name="chevron-right" style={styles.chevronIcon}></Icon>
+          <View style={phoneLoginStyles.buttonContainer}>
+            <TouchableOpacity style={phoneLoginStyles.floatingButton}>
+              <Icon
+                name="chevron-right"
+                style={phoneLoginStyles.chevronIcon}></Icon>
             </TouchableOpacity>
           </View>
         </KeyboardAvoidingView>
@@ -72,54 +71,5 @@ class PhoneLogin extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  phoneImage: {
-    flex: 1,
-    resizeMode: 'cover',
-    justifyContent: 'flex-end',
-    paddingHorizontal: 40,
-    paddingBottom: '10%',
-  },
-  imageText: {
-    fontSize: 22,
-    textAlign: 'center',
-    marginBottom: 20,
-  },
-  mobileInput: {
-    width: '100%',
-    borderWidth: 1,
-    paddingHorizontal: 15,
-    borderRadius: 30,
-    borderColor: '#DEDBDB',
-    color: 'white',
-  },
-  emptyField: {
-    borderColor: 'red',
-    borderWidth: 1,
-  },
-  errorIcon: {
-    position: 'relative',
-    right: 35,
-    top: 12,
-  },
-  buttonContainer: {
-    flexDirection: 'row-reverse',
-    paddingVertical: 30,
-  },
-  floatingButton: {
-    padding: 10,
-    backgroundColor: '#2EE9D1',
-    width: 50,
-    height: 50,
-    justifyContent: 'center',
-    borderRadius: 40,
-    elevation: 10,
-  },
-  chevronIcon: {
-    textAlign: 'center',
-    fontSize: 16,
-  },
-});
 
 export default PhoneLogin;
