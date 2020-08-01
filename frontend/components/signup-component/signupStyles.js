@@ -10,10 +10,14 @@ const signupStyles = StyleSheet.create({
   },
   card: {
     backgroundColor: 'white',
+    padding: 20,
+    elevation: 30,
+    borderRadius: 12,
   },
   signupHeader: {
     fontSize: 30,
     textAlign: 'center',
+    marginBottom: 10,
   },
 });
 
