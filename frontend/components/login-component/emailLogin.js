@@ -3,6 +3,7 @@ import {Text, ImageBackground, View} from 'react-native';
 import {TextInput, TouchableOpacity} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import {emailLoginStyles} from './loginStyles';
+import {commonStyles} from '../../assets/styles/commonStyles';
 
 class EmailLogin extends Component {
   constructor(props) {
@@ -35,7 +36,7 @@ class EmailLogin extends Component {
         name="exclamation-triangle"
         size={20}
         color={'red'}
-        style={emailLoginStyles.errorIcon}></Icon>
+        style={commonStyles.errorIcon}></Icon>
     );
     return (
       <View style={emailLoginStyles.loginContainer}>
@@ -47,28 +48,28 @@ class EmailLogin extends Component {
         </ImageBackground>
         <View style={[emailLoginStyles.inputContainer]}>
           <View style={emailLoginStyles.card}>
-            <View style={{flexDirection: 'row'}}>
+            <View style={commonStyles.flexrow}>
               <TextInput
                 placeholder={'Enter your email'}
                 style={[
-                  emailLoginStyles.loginInput,
-                  emailLoginStyles.mb14,
+                  commonStyles.input,
+                  commonStyles.mb14,
                   this.state.emailError
-                    ? emailLoginStyles.emptyField
-                    : emailLoginStyles.cardBottomText,
+                    ? commonStyles.emptyField
+                    : commonStyles.cardBottomText,
                 ]}
                 onChangeText={(email) => this.setState({email, emailError: ''})}
               />
               {this.state.emailError ? errorIcon : null}
             </View>
-            <View style={{flexDirection: 'row'}}>
+            <View style={commonStyles.flexrow}>
               <TextInput
                 placeholder={'Enter your password'}
                 style={[
-                  emailLoginStyles.loginInput,
+                  commonStyles.input,
                   this.state.passwordError
-                    ? emailLoginStyles.emptyField
-                    : emailLoginStyles.cardBottomText,
+                    ? commonStyles.emptyField
+                    : commonStyles.cardBottomText,
                 ]}
                 secureTextEntry={true}
                 onChangeText={(password) =>
@@ -77,7 +78,7 @@ class EmailLogin extends Component {
               />
               {this.state.passwordError ? errorIcon : null}
             </View>
-            <View style={emailLoginStyles.cardBottomText}>
+            <View style={commonStyles.cardBottomText}>
               <Text style={emailLoginStyles.label}>
                 No Account ? S
                 <Text onPress={() => this.props.navigation.navigate('signup')}>
@@ -87,9 +88,9 @@ class EmailLogin extends Component {
               <Text style={emailLoginStyles.label}>Forget Password?</Text>
             </View>
             <TouchableOpacity
-              style={emailLoginStyles.loginButton}
+              style={commonStyles.button}
               onPress={() => this.validate()}>
-              <Text style={emailLoginStyles.loginText}>Login</Text>
+              <Text style={commonStyles.buttonText}>Login</Text>
             </TouchableOpacity>
           </View>
         </View>

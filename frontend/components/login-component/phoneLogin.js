@@ -3,6 +3,7 @@ import {Text, ImageBackground, KeyboardAvoidingView, View} from 'react-native';
 import {TextInput, TouchableOpacity} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import {phoneLoginStyles} from './loginStyles';
+import {commonStyles} from '../../assets/styles/commonStyles';
 
 class PhoneLogin extends Component {
   constructor(props) {
@@ -27,7 +28,7 @@ class PhoneLogin extends Component {
         name="exclamation-triangle"
         size={20}
         color={'red'}
-        style={phoneLoginStyles.errorIcon}></Icon>
+        style={commonStyles.errorIcon}></Icon>
     );
     return (
       <ImageBackground
@@ -39,15 +40,13 @@ class PhoneLogin extends Component {
             Easy discover new places and travel around world with your family or
             friends
           </Text>
-          <View style={{flexDirection: 'row'}}>
+          <View style={commonStyles.flexrow}>
             <TextInput
               placeholder={'Enter your mobile number'}
               placeholderTextColor="white"
               style={[
-                phoneLoginStyles.mobileInput,
-                this.state.mobileNumberError
-                  ? phoneLoginStyles.emptyField
-                  : null,
+                commonStyles.input,
+                this.state.mobileNumberError ? commonStyles.emptyField : null,
               ]}
               onChangeText={(mobileNumber) => {
                 if (mobileNumber != '-' && mobileNumber != '.')
