@@ -1,23 +1,36 @@
 import {StyleSheet} from 'react-native';
 
 const signupStyles = StyleSheet.create({
-  backgroundImage: {
+  container: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'space-around',
-    paddingHorizontal: 20,
-    paddingBottom: 40,
-  },
-  card: {
-    backgroundColor: 'white',
-    padding: 20,
-    elevation: 30,
-    borderRadius: 12,
+    backgroundColor: '#009688',
   },
   signupHeader: {
-    fontSize: 30,
-    textAlign: 'center',
-    marginBottom: 10,
+    flex: 2,
+    justifyContent: 'flex-end',
+    paddingHorizontal: 25,
+    paddingBottom: 25,
+  },
+  title: {
+    fontSize: 40,
+    color: 'white',
+  },
+  subTitle: {
+    fontSize: 20,
+    marginTop: 5,
+    color: '#E9E7E7',
+  },
+  card: {
+    flex: 6,
+    backgroundColor: 'white',
+    padding: 30,
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+  },
+  label: {
+    marginLeft: 5,
+    fontSize: 16,
   },
 });
 

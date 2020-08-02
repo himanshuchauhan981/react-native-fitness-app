@@ -30,7 +30,7 @@ const emailLoginStyles = StyleSheet.create({
     elevation: 8,
   },
   label: {
-    marginTop: 6,
+    marginVertical: 6,
   },
 });
 

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, ImageBackground, View} from 'react-native';
+import {Text, View} from 'react-native';
 import {signupStyles} from './signupStyles';
 import {TextInput, TouchableOpacity} from 'react-native-gesture-handler';
 import {commonStyles} from '../../assets/styles/commonStyles';
@@ -9,123 +9,163 @@ class Signup extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      email: '',
-      number: '',
-      password: '',
-      nameError: '',
-      emailError: '',
-      numberError: '',
-      passwordError: '',
+      name: {
+        value: '',
+        error: '',
+      },
+      email: {
+        value: '',
+        error: '',
+      },
+      number: {
+        value: '',
+        error: '',
+      },
+      password: {
+        value: '',
+        error: '',
+      },
     };
     this.validate = this.validate.bind(this);
   }
 
   validate() {
     const {name, email, password, number} = this.state;
-    if (name == '') {
-      this.setState({
-        nameError: 'Required',
-      });
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (name.value == '') {
+      name.error = 'Required';
+      this.setState({name});
     }
-    if (email == '') {
-      this.setState({
-        emailError: 'Required',
-      });
+    if (email.value == '') {
+      email.error = 'Required';
+      this.setState({email});
     }
-    if (number == '') {
-      this.setState({
-        numberError: 'Required',
-      });
+    if (number.value == '') {
+      number.error = 'Required';
+      this.setState({number});
     }
-    if (password == '') {
-      this.setState({
-        passwordError: 'Required',
-      });
+    if (password.value == '') {
+      password.error = 'Required';
+      this.setState({password});
     }
   }
 
   render() {
-    const errorIcon = (
-      <Icon
-        name="exclamation-triangle"
-        size={20}
-        color={'red'}
-        style={commonStyles.errorIcon}></Icon>
-    );
-
     return (
-      <ImageBackground
-        resizeMode="cover"
-        style={signupStyles.backgroundImage}
-        source={require('../../assets/images/signupBackground.jpg')}>
+      <View style={signupStyles.container}>
+        <View style={signupStyles.signupHeader}>
+          <Text style={signupStyles.title}>Hey, get on board</Text>
+          <Text style={signupStyles.subTitle}>Sign up to continue</Text>
+        </View>
         <View style={signupStyles.card}>
-          <Text style={signupStyles.signupHeader}>Sign Up</Text>
-          <View style={commonStyles.flexrow}>
-            <TextInput
-              placeholder="Enter full name"
-              style={[
-                commonStyles.input,
-                commonStyles.mb14,
-                this.state.nameError
-                  ? commonStyles.emptyField
-                  : commonStyles.cardBottomText,
-              ]}
-              onChangeText={(name) => this.setState({name, nameError: ''})}
-            />
-            {this.state.nameError ? errorIcon : null}
-          </View>
-          <View style={commonStyles.flexrow}>
-            <TextInput
-              placeholder="Enter Email ID"
-              style={[
-                commonStyles.input,
-                commonStyles.mb14,
-                this.state.nameError
-                  ? commonStyles.emptyField
-                  : commonStyles.cardBottomText,
-              ]}
-              onChangeText={(email) => this.setState({email, emailError: ''})}
-            />
-            {this.state.emailError ? errorIcon : null}
-          </View>
-          <View style={commonStyles.flexrow}>
-            <TextInput
-              placeholder="Enter mobile number"
-              style={[
-                commonStyles.input,
-                commonStyles.mb14,
-                this.state.numberError
-                  ? commonStyles.emptyField
-                  : commonStyles.cardBottomText,
-              ]}
-              onChangeText={(number) =>
-                this.setState({number, numberError: ''})
-              }
-            />
-            {this.state.numberError ? errorIcon : null}
-          </View>
-          <View style={commonStyles.flexrow}>
-            <TextInput
-              placeholder="Enter password"
-              style={[
-                commonStyles.input,
-                commonStyles.mb14,
-                this.state.passwordError
-                  ? commonStyles.emptyField
-                  : commonStyles.cardBottomText,
-              ]}
-              onChangeText={(password) =>
-                this.setState({password, passwordError: ''})
-              }
-            />
-            {this.state.passwordError ? errorIcon : null}
-          </View>
+          <Text style={signupStyles.label}>Full name</Text>
+          <TextInput
+            placeholder="Enter full name"
+            style={[
+              commonStyles.input,
+              this.state.name.error
+                ? commonStyles.emptyField
+                : commonStyles.cardBottomText,
+            ]}
+            onChangeText={(name) => {
+              let oldState = this.state.name;
+              oldState.value = name;
+              if (oldState.error == 'Required') oldState.error = '';
+              if (oldState.value == '') oldState.error = 'Required';
+              this.setState(oldState);
+            }}
+          />
+          <Text style={commonStyles.errorText}>
+            {this.state.name.error ? this.state.name.error : null}
+          </Text>
+          <Text style={signupStyles.label}>Email address</Text>
+          <TextInput
+            placeholder="Enter Email ID"
+            style={[
+              commonStyles.input,
+              this.state.email.error
+                ? commonStyles.emptyField
+                : commonStyles.cardBottomText,
+            ]}
+            onChangeText={(email) => {
+              let oldState = this.state.email;
+              oldState.value = email;
+              if (oldState.error == 'Required') oldState.error = '';
+              if (oldState.value == '') oldState.error = 'Required';
+              const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+              let test = re.test(String(email).toLowerCase());
+              if (!test && email != '') oldState.error = 'Invalid email';
+              else if (test && email != '') oldState.error = '';
+              this.setState(oldState);
+            }}
+          />
+          <Text style={commonStyles.errorText}>
+            {this.state.email.error ? this.state.email.error : null}
+          </Text>
+          <Text style={signupStyles.label}>Mobile number</Text>
+          <TextInput
+            placeholder="Enter mobile number"
+            style={[
+              commonStyles.input,
+              this.state.number.error
+                ? commonStyles.emptyField
+                : commonStyles.cardBottomText,
+            ]}
+            onChangeText={(number) => {
+              let oldState = this.state.number;
+              oldState.value = number;
+              let re = /^((\+){0,1}91(\s){0,1}(\-){0,1}(\s){0,1}){0,1}98(\s){0,1}(\-){0,1}(\s){0,1}[1-9]{1}[0-9]{7}$/;
+              let test = re.test(number);
+              if (oldState.value == '') oldState.error = 'Required';
+              if (!test && number != '')
+                oldState.error = 'Invalid mobile number';
+              else if (test && number != '') oldState.error = '';
+              this.setState(oldState);
+            }}
+          />
+          <Text style={commonStyles.errorText}>
+            {this.state.number.error ? this.state.number.error : null}
+          </Text>
+          <Text style={signupStyles.label}>Password</Text>
+          <TextInput
+            placeholder="Enter password"
+            style={[
+              commonStyles.input,
+              this.state.password.error
+                ? commonStyles.emptyField
+                : commonStyles.cardBottomText,
+            ]}
+            onChangeText={(password) => {
+              let oldState = this.state.password;
+              oldState.value = password;
+              if (oldState.value == '') oldState.error = 'Required';
+              this.setState(oldState);
+            }}
+          />
+          <Text style={commonStyles.errorText}>
+            {this.state.password.error ? this.state.password.error : null}
+          </Text>
           <TouchableOpacity style={commonStyles.button} onPress={this.validate}>
             <Text style={commonStyles.buttonText}>Sign Up</Text>
           </TouchableOpacity>
+          <Text
+            style={{
+              alignSelf: 'center',
+              paddingVertical: 14,
+              fontSize: 17,
+              color: '#A8A5A5',
+            }}>
+            Or you can use
+          </Text>
+          <TouchableOpacity style={commonStyles.googleButton}>
+            <Icon name="google" size={16} />
+            <Text style={commonStyles.googleButtonText}>
+              {' '}
+              SIGNUP WITH GOOGLE
+            </Text>
+          </TouchableOpacity>
         </View>
-      </ImageBackground>
+      </View>
     );
   }
 }

@@ -3,20 +3,20 @@ import {StyleSheet} from 'react-native';
 const commonStyles = StyleSheet.create({
   emptyField: {
     borderColor: 'red',
-    borderWidth: 1,
+    borderBottomWidth: 1,
   },
-  errorIcon: {
-    position: 'relative',
-    right: 35,
-    top: 12,
+  errorText: {
+    fontSize: 16,
+    color: 'red',
+    fontWeight: '500',
+    textAlign: 'right',
   },
   input: {
     width: '100%',
     backgroundColor: 'white',
-    borderWidth: 1,
-    paddingHorizontal: 15,
-    borderRadius: 30,
-    borderColor: '#DEDBDB',
+    borderBottomWidth: 1,
+    paddingBottom: 0,
+    paddingTop: 5,
   },
   mb14: {
     marginBottom: 14,
@@ -24,29 +24,35 @@ const commonStyles = StyleSheet.create({
   cardBottomText: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    // paddingTop: 5,
-    // paddingBottom: 15,
   },
   flexrow: {
     flexDirection: 'row',
-  },
-  errorIcon: {
-    position: 'relative',
-    right: 35,
-    top: 12,
   },
   button: {
     elevation: 8,
     backgroundColor: '#009688',
     borderRadius: 10,
-    paddingVertical: 10,
+    paddingVertical: 14,
     paddingHorizontal: 12,
+    marginTop: 6,
   },
   buttonText: {
     textAlign: 'center',
     fontSize: 20,
     letterSpacing: 1,
     color: 'white',
+  },
+  googleButton: {
+    elevation: 1,
+    borderWidth: 1,
+    justifyContent: 'center',
+    flexDirection: 'row',
+    paddingVertical: 16,
+    borderColor: 'grey',
+  },
+  googleButtonText: {
+    fontSize: 16,
+    letterSpacing: 1,
   },
 });
 
